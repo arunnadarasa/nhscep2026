@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.3",
   "name": "EndoTrack Quantum Triage Agent",
-  "description": "Women's-health quantum biomarker triage agent (breast-cancer risk stratification on Quantinuum Guppy + Selene). Exposes certified quantum evidence — Fourier-wall QML advantage (0.640 vs 0.513 AUC on the order-3 interacting label), 16/16 cell QAOA verification, Guppy Playpond demo links, the Top-4 roadmap, and the RRI model card — to other agents via the EndoTrack MCP server. Evidence discipline: every number comes from committed, seed-tagged result JSON in the nhsquantinuum repository; no invented values; all data synthetic or public-aggregate (BCAC/CRUK/BCDB), Nexus T&C compliant. Not clinical guidance.",
+  "description": "Women's-health quantum biomarker triage agent (endometriosis risk stratification on Quantinuum Guppy + Selene). Exposes certified quantum evidence — Fourier-wall QML advantage (0.640 vs 0.513 AUC on the order-3 interacting label), 16/16 cell QAOA verification, Guppy Playpond demo links, the Top-4 roadmap, and the RRI model card — to other agents via the EndoTrack MCP server. Evidence discipline: every number comes from committed, seed-tagged result JSON in the nhsquantinuum repository; no invented values; all data synthetic or public-aggregate, Nexus T&C compliant. Not clinical guidance.",
   "url": "https://arunnadarasa.github.io/nhscep2026/",
   "version": "0.2.0",
   "documentationUrl": "https://github.com/arunnadarasa/nhsquantinuum/blob/main/docs/quantinuum-trajectory-futurist.md",
