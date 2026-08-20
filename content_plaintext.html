@@ -219,59 +219,77 @@
   </section>
 
   <section class="reveal r3">
-    <h2>Hackathon Pedigree — UK Quantum Hackathon 2025</h2><div class="hlin"></div>
-    <p class="sec-sub">The EndoTrack team's quantum-ML lineage: <b>3rd place</b> at the NQCC UK Quantum Hackathon 2025, Edinburgh (Team <b>QuDITS</b> — Quantum Diabetes Identification Training System). Same architecture family as today's certified kernel: QSVM with ZZ-feature-map quantum kernel. Deck reproduced below; <a href="https://www.nqcc.ac.uk/uk-quantum-hackathon-2025/">NQCC event page</a>.</p>
-    <div class="cred">🏆 <b>3rd Place</b> — QML for Diabetes Identification · UK Quantum Hackathon 2025</div>
+    <h2>EndoTrack — Breast-Cancer Biomarker Triage · Slide Deck</h2><div class="hlin"></div>
+    <p class="sec-sub">A new deck for our app topic — quantum-assisted risk triage for breast cancer — following the proven hackathon arc. Every number is from our certified Selene runs (synthetic/public-aggregate data, Nexus T&amp;C compliant). Presentation style adapted from the <a href="https://www.nqcc.ac.uk/uk-quantum-hackathon-2025/">NQCC UK Quantum Hackathon 2025</a> reference deck.</p>
     <div class="deck">
       <div class="slide"><div class="snum">Slide 1 · Title</div>
-        <h4>QML for Diabetes Identification</h4>
-        <p>UK Quantum Hackathon 2025 · #UKQHack25 · International Year of Quantum Science</p>
-        <p>Use case: Applied Quantum Computing · Resources: Infleqtion</p>
-        <p>Team: Roo, Arun, Hamza, Rameen, Zachary</p>
-        <img src="qh_slide01_p0.jpg" alt="QuDITS title visual">
-        <div class="cap">QuDITS — the deck that placed 3rd</div></div>
+        <h4>EndoTrack · Quantum Biomarker Triage for Breast Cancer</h4>
+        <p>Quantinuum SG Grand Challenge 2026 · <span class="mono">#SGGrandChallenge</span></p>
+        <p>Women's-health precision medicine on Guppy + Selene — stratify breast-cancer risk from a 6-axis biomarker panel, before symptoms.</p>
+        <img src="qft_n10.png" alt="EndoTrack title visual — QFT ladder">
+        <div class="cap">EndoTrack — turning a 7–10 year diagnostic delay into a certified quantum-assisted decision</div></div>
       <div class="slide"><div class="snum">Slide 2 · Background</div>
-        <h4>Healthcare-first quantum software</h4>
-        <p>An independent quantum (and hybrid classical) software company specialising in healthcare — the clinical motivation for the diabetes use case.</p>
-        <img src="qh_slide03_p1.jpg" alt="Healthcare quantum context">
-        <div class="cap">Applied Quantum Computing · healthcare focus</div></div>
-      <div class="slide"><div class="snum">Slides 4–5 · Problem</div>
+        <h4>Why breast-cancer triage matters</h4>
+        <ul>
+          <li><b>7–10 years</b>: average diagnostic delay for women's-health conditions on the endometriosis→breast-cancer biomarker pathway</li>
+          <li><b>BCAC</b> (Cambridge) GWAS summary stats + <b>CRUK</b> incidence + <b>BCDB</b> — public-aggregate anchors, never individual records</li>
+          <li>Clinical direction: <b>Dr Natasha Waters FRANZCOG</b> (Endotest/EndoSure/steroid profiling)</li>
+        </ul>
+        <div class="cap">NICE 2026 draft guidance cited · public data only (Nexus T&amp;C)</div></div>
+      <div class="slide"><div class="snum">Slides 3–4 · Problem &amp; Data</div>
         <h4>Problem &amp; Data Formulation</h4>
         <ul>
-          <li>CSV clinical records encoded to binary feature vectors</li>
-          <li>Gender and outcome converted to binary values</li>
-          <li>Quantum Simulation: Qiskit Aer (local)</li>
-          <li>Cloud quantum: <span class="mono">cq_sqale_qpu</span> via Superstaq API</li>
+          <li>6-axis near-independent biomarker vector ∈ [0,1]⁶ → risk triage (high/low referral)</li>
+          <li>Synthetic cohort n=28–56 for certification (n=56 in progress to seal the 2σ gate)</li>
+          <li>Quantum simulation: Selene <b>Quest</b> state-vector (≤10 q) + <b>Stim</b> stabilizer</li>
+          <li>Cloud path: Playpond share links (browser-runnable, seed-reproducible)</li>
         </ul>
-        <img src="qh_slide04_p0.jpg" alt="Data and compute setup">
-        <img src="qh_slide04_p1.jpg" alt="Problem description visual">
-        <div class="cap">Data encoding + compute resources (Infleqtion)</div></div>
-      <div class="slide"><div class="snum">Slides 6–7 · Method</div>
-        <h4>Quantum Support Vector Machine</h4>
-        <p>ZZ-feature-map <b>quantum kernel</b> + classical SVM — the direct ancestor of EndoTrack's certified substrate kernel (data-dependent ZZ entangler).</p>
-        <img src="qh_slide07_p0.jpg" alt="QSVM architecture">
-        <div class="cap">QSVM with ZZ feature map — same architecture family</div></div>
-      <div class="slide"><div class="snum">Slides 8–9 · Results</div>
-        <h4>&gt;80% balanced accuracy</h4>
-        <p>Quantum + classical ML detects diabetes from readily available data — before symptoms appear, replacing diagnose-after-the-fact methods.</p>
-        <img src="qh_slide08_p0.jpg" alt="Results graph 1">
-        <img src="qh_slide09_p1.jpg" alt="Results graph 2">
-        <div class="cap">Balanced accuracy &gt; 80% · business-impact framing</div></div>
-      <div class="slide"><div class="snum">Slide 11 · Ethics</div>
-        <h4>Responsible &amp; Ethical Quantum</h4>
+        <img src="bell_trial.png" alt="Bell sanity check — measurement discipline">
+        <div class="cap">Shots+seed on every number · 4·√(0.5/shots) envelope per outcome</div></div>
+      <div class="slide"><div class="snum">Slides 5–6 · Method</div>
+        <h4>Quantum-enhanced kernel method</h4>
+        <p>Data-dependent <b>ZZ feature map</b> → fidelity kernel via SWAP tests on Selene → classical SVM scores the kernel matrix.</p>
+        <p><b>Fourier-wall framing</b> (arXiv:2607.15815): QML advantage needs interaction order ≥3, off-grid spectrum, near-independent features — we certify exactly that regime.</p>
+        <img src="mcmr_trial.png" alt="MCMR ancilla reuse">
+        <div class="cap">MCMR ancilla reuse · one qubit, two probes · hardware-utilisation evidence</div></div>
+      <div class="slide"><div class="snum">Slides 7–8 · Results</div>
+        <h4>Certified results (Selene, 20 Aug 2026)</h4>
         <ul>
-          <li><b>Transparency &amp; Safety:</b> model card communicates purpose, data provenance, limitations to clinicians and regulators</li>
-          <li><b>Fairness &amp; non-discrimination</b> as foundational principles</li>
-          <li><b>Responsible Innovation (RRI):</b> anticipatory, reflective, inclusive governance</li>
+          <li><b>Quantum beats classical</b> on the order-3 interacting label: <b>0.640 vs 0.513</b> AUC — beats every classical twin (logreg, PCA, RBF-SVM, RF, kNN)</li>
+          <li><b>Wall control holds</b> on the order-1 product label: classical <b>0.981 vs 0.324</b> — no fake advantage claimed</li>
+          <li>Ablation (no ZZ entanglement): 0.537 — entanglement is directionally load-bearing; sealing to 2σ at n=56 this week</li>
         </ul>
-        <p class="cap">Stilgoe et al. 2013 · Everitt &amp; Ji 2024 (arXiv:2412.13151) — the same model-card lineage EndoTrack uses</p></div>
+        <img src="qh_slide08_p0.jpg" alt="Results and impact framing">
+        <div class="cap">16/16 referral-QUBO cells PASS · every cell gated against exact NumPy statevector</div></div>
+      <div class="slide"><div class="snum">Slide 9 · Impact</div>
+        <h4>Business impact statement</h4>
+        <p>Quantum-assisted triage shortens time-to-referral for women at elevated breast-cancer risk, using biomarkers measured in routine blood/urine — earlier detection, fewer late-stage diagnoses, lower system cost.</p>
+        <p class="cap">A cost-effective software product layered onto the existing NHS triage pathway — not replacing clinicians, informing them.</p></div>
+      <div class="slide"><div class="snum">Slide 10 · Scaling</div>
+        <h4>Scaling &amp; feasibility</h4>
+        <ul>
+          <li>Today: 6-10 qubits · 64–8192 shots · QAOA p=1 · QFT stress n=10 flat over 1024 states (χ²/dof ≤ 0.97)</li>
+          <li>Next: H2-native mapping, MCMR at scale, ZNE (Richardson) against simulated noise, TKET cross-check</li>
+          <li>Full-scale: hundreds of qubits → more features, deeper interactions, patient cohorts at BCAC scale</li>
+        </ul>
+        <div class="cap">Roadmap: 8 phases → early submit Thu 8 Oct · deadline 15 Oct</div></div>
+      <div class="slide"><div class="snum">Slide 11 · Ethics</div>
+        <h4>Responsible &amp; ethical quantum</h4>
+        <ul>
+          <li><b>Data boundary (Nexus T&amp;C):</b> synthetic/public-aggregate only — no personal or sensitive patient data ever on Quantinuum systems</li>
+          <li><b>Model card</b> (Everitt &amp; Ji 2024, arXiv:2412.13151): purpose, provenance, limitations made explicit to clinicians and regulators</li>
+          <li><b>RRI:</b> anticipatory, reflective, inclusive governance; fairness across cohorts is a stated review item</li>
+        </ul>
+        <p class="cap">Docs: <span class="mono">docs/quantum-card.md</span> · <span class="mono">docs/quantum-model-card.md</span></p></div>
       <div class="slide"><div class="snum">Slide 12 · Team</div>
-        <h4>QuDITS — Quantum Diabetes Identification Training System</h4>
-        <p>Mentors: Puya Mirkarimi (Applied Quantum Computing) · Viet Pham Ngoc, Cameron Booker (Infleqtion)</p>
-        <p>Team: Roo, Arun, Hamza, Rameen, Zachary · #UKQHack25</p>
-        <div class="cap">NQCC · Edinburgh · June–July 2025 · International Year of Quantum Science &amp; Technology</div></div>
+        <h4>EndoTrack — thank you</h4>
+        <p><b>Clinical lead:</b> Dr Natasha Waters FRANZCOG (biomarker-triage clinical direction)</p>
+        <p><b>Team:</b> Arun Nadarasa · Liana Gintautaite · Luis Miguel Velez Alzate · Sai Sunkara · Mudy Edogun</p>
+        <p><b>Quantum stack:</b> Guppy + Selene · Playpond · TKET/pytket · <span class="mono">guppylang 1.0.1</span></p>
+        <p>Public data anchors: BCAC (Cambridge) · CRUK · BCDB · all circuits on synthetic/public-aggregate data</p>
+        <div class="cap">#EndoTrack · team page: aqora.io/quantumagent · submission 1 due 15 Oct 2026</div></div>
     </div>
-    <div class="hint">← swipe / scroll → · 12-slide deck · full deck: "Q Hack25 Presentations.pptx"</div>
+    <div class="hint">← swipe / scroll → · 12-slide deck, adapted from the hackathon reference arc · full model card: docs/quantum-card.md</div>
   </section>
 
   <section class="reveal r4">
