@@ -46,6 +46,11 @@
   .paidbar{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;
     border:1px dashed rgba(62,230,255,.35);border-radius:12px;padding:.6rem .8rem;background:rgba(62,230,255,.04)}
   .paidbar .lbl{font-size:.72rem;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+  .paidbar .pmode{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+  .paidbar .pmode .tog{font-size:.75rem}
+  .pmodehint{flex-basis:100%;font-size:.68rem;color:var(--mut)}
+  .pmodehint.realhint{color:var(--green)}
+  .pmodehint.mockhint{color:var(--mut)}
   .paidbar select{padding:.45rem .6rem;border-radius:8px;border:1px solid #2b3550;background:#0a0e22;color:var(--txt);font-size:.8rem}
   #paygo{padding:.45rem 1rem;font-size:.82rem;border:0;border-radius:8px;background:var(--grad);color:#05060f;font-weight:700;cursor:pointer}
   .log{border:1px solid var(--stroke);border-radius:16px;background:var(--card);
@@ -93,6 +98,11 @@
 
   <div class="paidbar">
     <span class="lbl">💸 paid evidence query</span>
+    <span class="pmode" id="pmodeWrap">
+      <label class="tog"><input type="radio" name="pmode" value="mock" id="pmMock" checked> Mock demo</label>
+      <label class="tog"><input type="radio" name="pmode" value="real" id="pmReal"> Real testnet</label>
+      <span class="pill" id="pmodePill">mock</span>
+    </span>
     <input type="text" id="pname" value="endo_substrate_certified.json" placeholder="results file…" spellcheck="false">
     <select id="pcur">
       <option value="USDC">USDC (native)</option>
@@ -100,6 +110,7 @@
       <option value="cirBTC">cirBTC</option>
     </select>
     <button id="paygo">Pay $0.01 &amp; verify →</button>
+    <div class="pmodehint" id="pmodeHint">mock: offline fabricated tx · runs anywhere</div>
   </div>
 
   <div class="log" id="log">
@@ -131,6 +142,23 @@ const routePill = document.getElementById('routepill');
 const pnameEl = document.getElementById('pname');
 const pcurEl = document.getElementById('pcur');
 const paygoEl = document.getElementById('paygo');
+const pmodePill = document.getElementById('pmodePill');
+const pmodeHint = document.getElementById('pmodeHint');
+const pmReal = document.getElementById('pmReal');
+const pmMock = document.getElementById('pmMock');
+
+function paidMode(){ return pmReal.checked ? 'real' : 'mock'; }
+function onModeChange(){
+  const m = paidMode();
+  pmodePill.textContent = m;
+  pmodePill.className = 'pill' + (m === 'real' ? ' on' : '');
+  pmodeHint.textContent = m === 'real'
+    ? 'real: broadcasts a REAL Arc testnet payment (requires an armed bridge: X402_MOCK=0 + RPC + payer key)'
+    : 'mock: offline fabricated tx · runs anywhere';
+  pmodeHint.className = 'pmodehint ' + (m === 'real' ? 'realhint' : 'mockhint');
+}
+pmReal.addEventListener('change', onModeChange);
+pmMock.addEventListener('change', onModeChange);
 
 SUGGESTIONS.forEach(s => {
   const c = document.createElement('span');
@@ -184,12 +212,12 @@ async function payVerify(){
   addRow('<div class="status payline">402 challenge → settle → verify…</div>');
   const last = logEl.lastElementChild;
   try{
-    const d = await post({paid: {autopay: true, name, currency}});
+    const d = await post({paid: {autopay: true, name, currency, mode: paidMode()}});
     logEl.removeChild(last);
     if(d.status === 200){
-      addRow(`<div class="a okgreen"><span class="tl">⟐ verify_artifact_paid</span>PAID ✓ — receipt <span class="src">${esc(d.receipt.reference.slice(0,20))}…</span> (${esc(d.currency)}), artifact ok=${d.artifact.ok}, ${d.artifact.bytes} bytes</div>`);
+      addRow(`<div class="a okgreen"><span class="tl">⟐ verify_artifact_paid</span>PAID ✓ — receipt <span class="src">${esc(d.receipt.reference.slice(0,20))}…</span> (${esc(d.currency)}), artifact ok=${d.artifact.ok}, ${d.artifact.bytes} bytes${d.note ? ' · ' + esc(d.note) : ''}</div>`);
     }else{
-      addRow(`<div class="a err"><span class="tl">⟐ verify_artifact_paid</span>${esc(JSON.stringify(d))}</div>`);
+      addRow(`<div class="a err"><span class="tl">⟐ verify_artifact_paid</span>${esc(d.detail || JSON.stringify(d))}${d.txHash ? ' · tx ' + esc(d.txHash.slice(0,18)) + '…' : ''}</div>`);
     }
   }catch(e){
     logEl.removeChild(last);
