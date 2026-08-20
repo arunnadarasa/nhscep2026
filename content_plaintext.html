@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EndoTrack — Team Portal</title>
+<style>
+  body { margin:0; background:#0b1020; color:#e8eaf2; font-family:ui-sans-serif,system-ui,-apple-system,sans-serif; line-height:1.55; }
+  .wrap { max-width:960px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+  header { border-bottom:1px solid #1e2745; padding-bottom:1.25rem; margin-bottom:2rem; }
+  h1 { font-size:1.8rem; margin:.2rem 0 .3rem; }
+  .sub { color:#9aa3c0; font-size:.95rem; }
+  h2 { margin-top:2.6rem; font-size:1.25rem; color:#9fc0ff; border-bottom:1px solid #1e2745; padding-bottom:.4rem; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin-top:1rem; }
+  .card { background:#121a32; border:1px solid #1e2745; border-radius:12px; padding:1rem 1.1rem; }
+  .card .big { font-size:1.6rem; font-weight:700; color:#7fe0b0; }
+  .card .lbl { font-size:.8rem; color:#9aa3c0; text-transform:uppercase; letter-spacing:.05em; }
+  table { border-collapse:collapse; width:100%; margin-top:1rem; font-size:.9rem; }
+  th,td { border:1px solid #1e2745; padding:.5rem .65rem; text-align:left; }
+  th { background:#131a30; color:#9fc0ff; }
+  .ok { color:#7fe0b0; } .no { color:#ff8a8a; }
+  img { max-width:100%; border-radius:10px; border:1px solid #1e2745; margin:.5rem 0; }
+  a { color:#7fa6ff; }
+  .tag { display:inline-block; background:#1e2745; border-radius:99px; padding:.15rem .6rem; font-size:.75rem; margin:.1rem .2rem .1rem 0; color:#c7d2f0; }
+  footer { margin-top:3rem; color:#5f6b8c; font-size:.8rem; border-top:1px solid #1e2745; padding-top:1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">Quantinuum SG Grand Challenge 2026</div>
+  <h1>EndoTrack — Quantum Biomarker Triage</h1>
+  <div class="sub">nhsquantinuum · London · women's-health precision medicine on Guppy + Selene</div>
+</header>
+
+<h2>🚀 The Trajectory</h2>
+<div class="cards">
+  <div class="card"><div class="lbl">Verified Selene cells</div><div class="big">16/16</div>referral-QUBO sweep PASS at n=4–10 × 64–8192 shots</div>
+  <div class="card"><div class="lbl">Quantum beats classical<br>on order-3 label</div><div class="big">0.640 vs 0.513</div>AUC, certified substrate (Fourier-wall gate)</div>
+  <div class="card"><div class="lbl">Classical crushes on<br>order-1 control</div><div class="big">0.981 vs 0.324</div>wall control holds — no fake advantage</div>
+  <div class="card"><div class="lbl">Playpond demo</div><div class="big">10+</div>share links incl. QFT stress at n=10 (1024 states)</div>
+</div>
+
+<h2>🔬 Breakthroughs (verified, committed)</h2>
+<table>
+<tr><th>Date</th><th>Breakthrough</th><th>Verdict</th></tr>
+<tr><td>20 Aug</td><td>1-qubit smoke kernel @64 shots</td><td class="ok">P(0)=0.547 ≈ 0.5 ✓</td></tr>
+<tr><td>20 Aug</td><td>EndoTrack referral-QUBO — QAOA p=1, 16/16 cells</td><td class="ok">all PASS, beats-random-not-classical (honest)</td></tr>
+<tr><td>20 Aug</td><td>Fourier-probe: frequency ∝ re-upload depth</td><td class="ok">zero-crossings 4→8→16 for L=1/2/4</td></tr>
+<tr><td>20 Aug</td><td>Certified substrate 4/4 cells (arXiv:2607.15815 recipe)</td><td class="ok">quantum 0.64 vs classical 0.51 on order-3</td></tr>
+<tr><td>20 Aug</td><td>Playpond QFT stress ladder n=4/6/8/10</td><td class="ok">all FLAT (χ²/dof ≤ 0.97)</td></tr>
+<tr><td>24 Aug+</td><td>n=56 ablation seal (2σ gate), noise ladder, ZNE, TKET cross-check</td><td>in progress — daily bot on the board</td></tr>
+</table>
+
+<h2>🧬 Quantum Model Card — EndoTrack QK-SVM v0.1</h2>
+<p>Following Everitt &amp; Ji (2024), <em>Model Cards for Quantum Technologies Reporting</em>, arXiv:2412.13151, and the RRI framework (Stilgoe et al. 2013). <em>This is a transparency document for a research prototype on synthetic data — not a clinical tool.</em></p>
+<div class="cards">
+  <div class="card"><div class="lbl">Description</div>A quantum-enhanced support-vector machine using a data-dependent ZZ feature map; the fidelity kernel between patient feature vectors is measured by SWAP tests on the Selene emulator, then scored by a classical SVM (Havlíček-style quantum kernel).</div>
+  <div class="card"><div class="lbl">Training data</div>Synthetic, near-independent biomarker feature vectors (6 axes: genetic/proteomic/steroid/miRNA proxies). No personal or sensitive data — Nexus T&amp;C compliant. Public aggregate anchors: BCAC summary statistics, CRUK stats, BCDB.</div>
+  <div class="card"><div class="lbl">Input / Output</div><b>Input:</b> normalised multi-omics feature vector ∈ ℝ⁶ (each feature in [0,1]). <b>Output:</b> binary triage risk score; in the certified demo, order-3-interaction labels vs order-1 controls.</div>
+</div>
+<table>
+<tr><th>Property</th><th>Value</th></tr>
+<tr><td>Architecture</td><td>ZZ-entangled angle-encoded feature map, L=3 re-uploads, SWAP-test fidelity kernel, classical SVM (kernel='precomputed', C=1)</td></tr>
+<tr><td>Hardware (current)</td><td>Selene emulator / Quest state-vector (≤10 q), Playpond builds (browser); H2-native mapping in progress (30% hardware-utilisation track)</td></tr>
+<tr><td>Software stack</td><td>guppylang 1.0.1, selene-sim, scikit-learn 1.9, numpy/scipy</td></tr>
+<tr><td>Provenance &amp; reproducibility</td><td>Every number tied to a named run + seed; probability claims carry 4√(0.5/shots) envelope; results committed as JSON in arunnadarasa/nhsquantinuum</td></tr>
+<tr><td>Fairness / bias</td><td>Synthetic data only — no real patient bias can be certified; sex/gender and ethnicity axes deliberately excluded from claims until real (public-aggregate) cohorts</td></tr>
+<tr><td>Known limitations</td><td>Small-cohort variance (±0.24 AUC at n=28); entanglement-ablation gap directional but ~1σ at n=28 (n=56 seal in progress); emulator results ≠ on-device results</td></tr>
+<tr><td>Governance</td><td>NICE 2026 draft guidance on biomarker tests cited; EndoTrack is an early-use research prototype, not a regulatory submission</td></tr>
+</table>
+
+<h2>🖥️ Live proof — Playpond runs</h2>
+<div class="cards">
+  <div class="card"><div class="lbl">QFT stress · n=10</div><img src="qft_n10.png" alt="QFT n=10 Playpond result"></div>
+  <div class="card"><div class="lbl">MCMR ancilla reuse</div><img src="mcmr_trial.png" alt="MCMR reuse trial"></div>
+  <div class="card"><div class="lbl">Bell sanity check</div><img src="bell_trial.png" alt="Bell state trial"></div>
+</div>
+<p>One-click Playpond share links (program + simulator + shots encoded): Bell, biomarker tilt, MCMR reuse, EndoTrack QUBO, Fourier probe, QFT ladder — see <code>docs/playpond-demo.md</code> in the repo.</p>
+
+<h2>🗺️ Road to Top-4 (submission 1: 15 Oct 2026)</h2>
+<table>
+<tr><th>Phase</th><th>Week</th><th>Focus</th></tr>
+<tr><td>0</td><td>17 Aug</td><td class="ok">✅ Foundation (smoke, QUBO sweep, substrate, Playpond)</td></tr>
+<tr><td>1</td><td>24 Aug</td><td>Certify mechanism: n=56 2σ ablation, noise ladder, ZNE, TKET</td></tr>
+<tr><td>2</td><td>31 Aug</td><td>Hardware utilisation: H2-native mapping, MCMR at scale</td></tr>
+<tr><td>3</td><td>7 Sep</td><td>Scientific claim with CIs + ablations</td></tr>
+<tr><td>4</td><td>14 Sep</td><td>Clinical bridge: BCAC/CRUK synthetic axes, GP-pathway story</td></tr>
+<tr><td>5</td><td>21 Sep</td><td>Code quality: fresh-clone reproducibility, tests</td></tr>
+<tr><td>6–7</td><td>28 Sep–5 Oct</td><td>Submission build; <b>submit early Thu 8 Oct</b></td></tr>
+</table>
+
+<footer>
+EndoTrack · nhsquantinuum · clinical idea credit: Dr Natasha Waters FRANZCOG ·
+public data anchors: BCAC (Cambridge), CRUK, BCDB · All circuits on synthetic/public-aggregate data (Nexus T&amp;C) · Not clinical guidance.
+</footer>
+</div>
+</body>
+</html>
