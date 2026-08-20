@@ -111,6 +111,31 @@
     background:rgba(62,230,255,.05);transition:all .2s}
   .link:hover{background:rgba(62,230,255,.14);box-shadow:0 0 18px rgba(62,230,255,.25)}
 
+  /* ---- hackathon deck carousel (pure CSS scroll-snap) ---- */
+  .deck{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:.4rem .2rem 1.2rem;margin-top:1.2rem;scrollbar-width:thin;
+    scrollbar-color:rgba(120,140,255,.3) transparent}
+  .deck::-webkit-scrollbar{height:6px}
+  .deck::-webkit-scrollbar-thumb{background:rgba(120,140,255,.3);border-radius:99px}
+  .slide{scroll-snap-align:start;flex:0 0 min(78%,460px);border-radius:18px;padding:1.3rem 1.4rem;
+    background:linear-gradient(160deg,rgba(20,28,60,.9),rgba(8,11,26,.95));
+    border:1px solid var(--stroke);backdrop-filter:blur(10px);
+    transition:transform .25s ease,border-color .25s ease}
+  .slide:hover{transform:translateY(-3px);border-color:rgba(130,160,255,.4)}
+  .slide .snum{font-family:var(--mono);font-size:.72rem;color:var(--cyan);
+    letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+  .slide h4{margin:.35rem 0 .6rem;font-size:1.12rem;line-height:1.3}
+  .slide p{margin:.25rem 0;font-size:.84rem;color:#c9d3f5}
+  .slide ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.84rem;color:#c9d3f5}
+  .slide li{margin:.2rem 0}
+  .slide img{margin-top:.8rem;border-radius:12px;border:1px solid rgba(120,140,255,.15);width:100%}
+  .cred{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;color:#ffe9a8;
+    border:1px solid rgba(255,220,120,.35);background:rgba(255,220,120,.07);
+    border-radius:99px;padding:.35rem .9rem;margin-top:.5rem}
+  .cred b{color:#fff2c0}
+  .cap{margin:.4rem 0 0;font-size:.72rem;color:var(--mut)}
+  .hint{font-size:.75rem;color:#5f6b8c;margin-top:.2rem;font-family:var(--mono)}
+
   /* ---- phase bars ---- */
   .phase{display:flex;align-items:center;gap:.9rem;padding:.65rem .9rem;border-radius:12px;
     border:1px solid rgba(120,140,255,.12);margin:.4rem 0;background:rgba(10,14,34,.4)}
@@ -191,6 +216,62 @@
       <div class="mcard"><h4>Input → Output</h4><p>ℝ⁶ feature vector ∈ [0,1] → binary triage risk; certified on order-3-interaction labels vs order-1 controls.</p></div>
       <div class="mcard"><h4>Governance</h4><p>NICE 2026 draft guidance cited; early-use prototype, not a regulatory submission. Full card: <span class="mono">docs/quantum-model-card.md</span></p></div>
     </div>
+  </section>
+
+  <section class="reveal r3">
+    <h2>Hackathon Pedigree — UK Quantum Hackathon 2025</h2><div class="hlin"></div>
+    <p class="sec-sub">The EndoTrack team's quantum-ML lineage: <b>3rd place</b> at the NQCC UK Quantum Hackathon 2025, Edinburgh (Team <b>QuDITS</b> — Quantum Diabetes Identification Training System). Same architecture family as today's certified kernel: QSVM with ZZ-feature-map quantum kernel. Deck reproduced below; <a href="https://www.nqcc.ac.uk/uk-quantum-hackathon-2025/">NQCC event page</a>.</p>
+    <div class="cred">🏆 <b>3rd Place</b> — QML for Diabetes Identification · UK Quantum Hackathon 2025</div>
+    <div class="deck">
+      <div class="slide"><div class="snum">Slide 1 · Title</div>
+        <h4>QML for Diabetes Identification</h4>
+        <p>UK Quantum Hackathon 2025 · #UKQHack25 · International Year of Quantum Science</p>
+        <p>Use case: Applied Quantum Computing · Resources: Infleqtion</p>
+        <p>Team: Roo, Arun, Hamza, Rameen, Zachary</p>
+        <img src="qh_slide01_p0.jpg" alt="QuDITS title visual">
+        <div class="cap">QuDITS — the deck that placed 3rd</div></div>
+      <div class="slide"><div class="snum">Slide 2 · Background</div>
+        <h4>Healthcare-first quantum software</h4>
+        <p>An independent quantum (and hybrid classical) software company specialising in healthcare — the clinical motivation for the diabetes use case.</p>
+        <img src="qh_slide03_p1.jpg" alt="Healthcare quantum context">
+        <div class="cap">Applied Quantum Computing · healthcare focus</div></div>
+      <div class="slide"><div class="snum">Slides 4–5 · Problem</div>
+        <h4>Problem &amp; Data Formulation</h4>
+        <ul>
+          <li>CSV clinical records encoded to binary feature vectors</li>
+          <li>Gender and outcome converted to binary values</li>
+          <li>Quantum Simulation: Qiskit Aer (local)</li>
+          <li>Cloud quantum: <span class="mono">cq_sqale_qpu</span> via Superstaq API</li>
+        </ul>
+        <img src="qh_slide04_p0.jpg" alt="Data and compute setup">
+        <img src="qh_slide04_p1.jpg" alt="Problem description visual">
+        <div class="cap">Data encoding + compute resources (Infleqtion)</div></div>
+      <div class="slide"><div class="snum">Slides 6–7 · Method</div>
+        <h4>Quantum Support Vector Machine</h4>
+        <p>ZZ-feature-map <b>quantum kernel</b> + classical SVM — the direct ancestor of EndoTrack's certified substrate kernel (data-dependent ZZ entangler).</p>
+        <img src="qh_slide07_p0.jpg" alt="QSVM architecture">
+        <div class="cap">QSVM with ZZ feature map — same architecture family</div></div>
+      <div class="slide"><div class="snum">Slides 8–9 · Results</div>
+        <h4>&gt;80% balanced accuracy</h4>
+        <p>Quantum + classical ML detects diabetes from readily available data — before symptoms appear, replacing diagnose-after-the-fact methods.</p>
+        <img src="qh_slide08_p0.jpg" alt="Results graph 1">
+        <img src="qh_slide09_p1.jpg" alt="Results graph 2">
+        <div class="cap">Balanced accuracy &gt; 80% · business-impact framing</div></div>
+      <div class="slide"><div class="snum">Slide 11 · Ethics</div>
+        <h4>Responsible &amp; Ethical Quantum</h4>
+        <ul>
+          <li><b>Transparency &amp; Safety:</b> model card communicates purpose, data provenance, limitations to clinicians and regulators</li>
+          <li><b>Fairness &amp; non-discrimination</b> as foundational principles</li>
+          <li><b>Responsible Innovation (RRI):</b> anticipatory, reflective, inclusive governance</li>
+        </ul>
+        <p class="cap">Stilgoe et al. 2013 · Everitt &amp; Ji 2024 (arXiv:2412.13151) — the same model-card lineage EndoTrack uses</p></div>
+      <div class="slide"><div class="snum">Slide 12 · Team</div>
+        <h4>QuDITS — Quantum Diabetes Identification Training System</h4>
+        <p>Mentors: Puya Mirkarimi (Applied Quantum Computing) · Viet Pham Ngoc, Cameron Booker (Infleqtion)</p>
+        <p>Team: Roo, Arun, Hamza, Rameen, Zachary · #UKQHack25</p>
+        <div class="cap">NQCC · Edinburgh · June–July 2025 · International Year of Quantum Science &amp; Technology</div></div>
+    </div>
+    <div class="hint">← swipe / scroll → · 12-slide deck · full deck: "Q Hack25 Presentations.pptx"</div>
   </section>
 
   <section class="reveal r4">
