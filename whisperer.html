@@ -65,6 +65,8 @@
   .status{font-size:.78rem;color:var(--mut);margin:.3rem 0}
   .err{color:#ff7b7b}
   .okgreen{color:var(--green)}
+  .txlnk{color:var(--cyan);text-decoration:none;border-bottom:1px dashed rgba(62,230,255,.5);font-family:var(--mono);font-size:.8rem;transition:color .15s}
+  .txlnk:hover{color:#9be9ff;border-bottom-color:var(--cyan)}
   .payline{font-family:var(--mono);font-size:.78rem}
   footer{margin-top:2.4rem;color:#5f6b8c;font-size:.75rem;text-align:center}
   ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(120,140,255,.3);border-radius:99px}
@@ -215,9 +217,13 @@ async function payVerify(){
     const d = await post({paid: {autopay: true, name, currency, mode: paidMode()}});
     logEl.removeChild(last);
     if(d.status === 200){
-      addRow(`<div class="a okgreen"><span class="tl">⟐ verify_artifact_paid</span>PAID ✓ — receipt <span class="src">${esc(d.receipt.reference.slice(0,20))}…</span> (${esc(d.currency)}), artifact ok=${d.artifact.ok}, ${d.artifact.bytes} bytes${d.note ? ' · ' + esc(d.note) : ''}</div>`);
+      const ref = (d.receipt && d.receipt.reference) || d.txHash || '';
+      const link = ref
+        ? `<a class="txlnk" href="https://testnet.arcscan.app/tx/${encodeURIComponent(ref)}" target="_blank" rel="noopener">${esc(ref.slice(0,20))}… ↗</a>`
+        : '(mock)';
+      addRow(`<div class="a okgreen"><span class="tl">⟐ verify_artifact_paid</span>PAID ✓ — receipt ${link} (${esc(d.currency)}), artifact ok=${d.artifact.ok}, ${d.artifact.bytes} bytes${d.note ? ' · ' + esc(d.note) : ''}</div>`);
     }else{
-      addRow(`<div class="a err"><span class="tl">⟐ verify_artifact_paid</span>${esc(d.detail || JSON.stringify(d))}${d.txHash ? ' · tx ' + esc(d.txHash.slice(0,18)) + '…' : ''}</div>`);
+      addRow(`<div class="a err"><span class="tl">⟐ verify_artifact_paid</span>${esc(d.detail || JSON.stringify(d))}${d.txHash ? ' · tx <a class="txlnk" href="https://testnet.arcscan.app/tx/' + encodeURIComponent(d.txHash) + '" target="_blank" rel="noopener">' + esc(d.txHash.slice(0,18)) + '… ↗</a>' : ''}</div>`);
     }
   }catch(e){
     logEl.removeChild(last);
